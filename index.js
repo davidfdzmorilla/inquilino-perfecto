@@ -1,11 +1,13 @@
 require('dotenv').config()
 const express = require('express')
+const fileupload = require('express-fileupload')
 const { usersRoutes, bookingsRoutes, housesRoutes } = require('./routes')
 const { BASE_URL, PORT } = process.env
 
 const app = express()
 
 app.use(express.json())
+app.use(fileupload())
 app.use('/users', usersRoutes)
 app.use('/bookings', bookingsRoutes)
 app.use('/houses', housesRoutes)
