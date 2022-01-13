@@ -3,6 +3,8 @@ const { MAX_IMAGE_SIZE_IN_BYTES, UPLOADS_PATH } =  process.env
 const ALLOWED_MIMETYPES = ['image/jpg', 'image/jpeg', 'image/png']
 
 const crypto = require('crypto')
+const { invalid } = require('joi')
+const mimeTypes = require('nodemailer/lib/mime-funcs/mime-types')
 
 
 const areValidImagesSize = (picturesData) => {
@@ -24,7 +26,8 @@ const areValidImagesSize = (picturesData) => {
       mimetype = mimetype.split('/')[1]
       formatedValidsMimetsypes.push(mimetype)
     })
-    console.log(areValids)
+    
+    console.log(mimetypesData)
     console.log(formatedValidsMimetsypes)
     // return ALLOWED_MIMETYPES.includes(mimetype.toLowerCase())
 }
