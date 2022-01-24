@@ -26,25 +26,35 @@ const areValidImagesSize = (picturesData) => {
       mimetype = mimetype.split('/')[1]
       formatedValidsMimetsypes.push(mimetype)
     })
-    
-    console.log(mimetypesData)
-    console.log(formatedValidsMimetsypes)
-    // return ALLOWED_MIMETYPES.includes(mimetype.toLowerCase())
+    const arrayComparacion = mimetypesData.filter(pos => formatedValidsMimetsypes.includes(pos))
+    if(arrayComparacion.length !== mimetypesData.length) {
+      return false
+    } else {
+      return arrayComparacion
+    }
+
+}
+
+const getExtensionFromMimetype = (pictures) => {
+  let picturesMimetypes = []
+  pictures.map(picture => {
+    picturesMimetypes.push(picture.mimetype.split('/')[1])
+  })
+  return picturesMimetypes
 }
 
 
-  const removeFile = async (fileName) => {
-    fs.remove(`${UPLOADS_PATH}/${fileName}`)
-}
-
-  const createImageName = (extension) => {
-    const randomHash = crypto.randomBytes(15).toString('hex')
-    return `${randomHash}.${extension}`
+  const createImageName = (pictures) => {
+    let picturesName = []
+    pictures.map(picture => {
+      picturesName.push(`${crypto.randomBytes(15).toString('hex')}.${picture}`)
+    })
+    return picturesName
 }
 
 module.exports = {
     areValidImagesSize,
     areValidImagesMimeType,
-    removeFile,
+    getExtensionFromMimetype,
     createImageName
 }
