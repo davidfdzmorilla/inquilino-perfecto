@@ -125,9 +125,9 @@ function TenantProfile() {
     )
 }
 
-const ProfileWrapper = () =>
+const tenantProfileWrapper = () =>
     <Suspense fallback={<Loading className="historic-bookings-container" />}>
         <TenantProfile />
     </Suspense>
 
-export default ProfileWrapper
+export default tenantProfileWrapper
