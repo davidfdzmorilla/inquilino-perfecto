@@ -54,16 +54,16 @@ function CardReceivedPendingBooking( { bookingData } ) {
 
     return (
         <article className='card-received-booking' key={bookingData.bookingId}>
-            <div key={bookingData.housePicUrl} className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.housePicUrl})` }} ></div>
-            <Link key={bookingData.title} to={'/houses/' + bookingData.houseId} className='title-received-booking'>{bookingData.title}<span> ➕info</span></Link>
+            <div className="picture-received-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.housePicUrl})` }} ></div>
+            <Link to={'/houses/' + bookingData.houseId} className='title-received-booking'>{bookingData.title}</Link>
             <div className='tenant-data-container'>
-                <div className='tenant-avatar' key={bookingData.tenantPicture} style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
-                <p className='name-tenant' key={bookingData.tenantFirstName}>{bookingData.tenantName} {bookingData.tenantLastName}</p>
+                <div className='tenant-avatar' style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${bookingData.tenantPicture})` }} />
+                <p className='name-tenant'>{bookingData.tenantName} {bookingData.tenantLastName}</p>
                 <div className='rating-tenant'>
-                    <Puntuacion value={bookingData.ratingAvg} className='rating-tenant' key={bookingData.ratingAvg}></Puntuacion>
+                    <Puntuacion value={bookingData.ratingAvg} className='rating-tenant'></Puntuacion>
                 </div>
             </div>
-            <p key={bookingData.startDate} className='date-received-booking' >Desde el {bookingData.startDate.slice(0, 10)} hasta el {bookingData.endDate.slice(0, 10)}</p>
+            <p className='date-received-booking' >Desde el {bookingData.startDate.slice(0, 10)} hasta el {bookingData.endDate.slice(0, 10)}</p>
             <div className='buttons-received-bookings'>
                 <span bookingid={Number(bookingData.bookingId)} onClick={handleConfirmReceivedBooking}>Aceptar</span>
                 <span bookingid={Number(bookingData.bookingId)} onClick={handleCancelReceivedBooking}>Cancelar</span>

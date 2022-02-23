@@ -37,13 +37,20 @@ const ScoreToOwner = ( { bookingData } ) =>  {
     }
 
     return(
-        <div>
+        <div className='rating-historic-tenant'>
             {!bookingData.tenantRating ?
                 <form onSubmit={handleSubmit}>
-                    <input onChange={e => setRating(e.target.value)} type='number' placeholder='Califica tu estancia' min='0' max='5' />
-                    <button>Enviar</button>
+                    <div>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(1)}>{rating >= 1 ? '★' : '☆'}</abbr>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(2)}>{rating >= 2 ? '★' : '☆'}</abbr>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(3)}>{rating >= 3 ? '★' : '☆'}</abbr>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(4)}>{rating >= 4 ? '★' : '☆'}</abbr>
+                    <abbr title="Click para valorar" className='star-for-rating' onClick={e => setRating(5)}>{rating >= 5 ? '★' : '☆'}</abbr>
+                    </div>
+                    {/* <input onChange={e => setRating(e.target.value)} type='number' placeholder='Califica tu estancia' min='0' max='5' /> */}
+                    <button className='button-rating'>Valora tu estancia</button>
                 </form>
-                : <Puntuacion value={bookingData.tenantRating} />}
+                : <span className='rating-historic-tenant'><Puntuacion value={bookingData.tenantRating}/></span>}
         </div>
     )
 }

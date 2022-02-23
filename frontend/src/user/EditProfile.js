@@ -1,6 +1,6 @@
 import './EditProfile.css'
 import { Suspense, useState } from 'react'
-import { useSetModal, useSetUser, useUser } from '../hooks'
+import { useSetUser, useUser } from '../hooks'
 import useFetch from "../useFetch"
 import Loading from '../Loading'
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
@@ -19,7 +19,6 @@ function EditProfile() {
 
     const user = useUser()
     const setUser = useSetUser()
-    const setModal = useSetModal()
 
     const userData = useFetch(REACT_APP_BASE_URL + '/users/profile', {
         headers: {
@@ -52,13 +51,6 @@ function EditProfile() {
         const newUser = data.user
 
         if (res.ok) {
-            setModal(
-                <article className='edit-confirm-message-container'>
-                    <span>✅</span>
-                    <p>Tus cambios se guardaron correctamente.</p>
-                    <p>Recuerda que si registraste un nuevo e-mail, deberás activar tu cuenta desde el mensaje de activación que hemos enviado a tu correo.</p>
-                </article>
-            )
             setUser({
                 token: user.token,
                 firstName: newUser.firstName,

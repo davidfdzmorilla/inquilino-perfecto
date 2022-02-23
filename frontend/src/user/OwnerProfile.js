@@ -4,20 +4,10 @@ import Loading from "../Loading"
 import useFetch from "../useFetch"
 import { Link } from 'react-router-dom'
 import ScoreToTenant from './ScoreToTenant'
+import Puntuacion from '../Puntuacion'
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL
 
-function Puntuacion({ value }) {
-    return (
-        <span className="puntuacion">
-            {value >= 1 ? '★' : '☆'}
-            {value >= 2 ? '★' : '☆'}
-            {value >= 3 ? '★' : '☆'}
-            {value >= 4 ? '★' : '☆'}
-            {value >= 5 ? '★' : '☆'}
-        </span>
-    )
-}
 
 
 function OwnerProfile() {
@@ -40,10 +30,9 @@ function OwnerProfile() {
     const handleNextRatings = () => setStepRating((stepRating + 1) % pagsRatings)
 
     const rentalsOffered = useFetch(REACT_APP_BASE_URL + '/bookings/received/accepted')
-    console.log(rentalsOffered)
     const [stepBooking, setStepBooking] = useState(0)
 
-    const perPageBookings = 2
+    const perPageBookings = 3
     const pagsBookings = Math.ceil(rentalsOffered?.length / perPageBookings)
     const handlePrevBookings = () => setStepBooking(stepBooking > 0 ? stepBooking - 1 : pagsBookings - 1)
     const handleNextBookings = () => setStepBooking((stepBooking + 1) % pagsBookings)
@@ -72,7 +61,7 @@ function OwnerProfile() {
             <section className='rental-history'>
                 <h3>Historico de alquileres ofertados</h3>
                 {rentalsOffered?.slice(stepBooking * perPageBookings, (stepBooking + 1) * perPageBookings).map(booking =>
-                    <article className='card-house-historic-booking' key={booking.houseId}>
+                    <article className='card-house-historic-booking' key={booking.bookingId}>
                         <div className="picture-historic-booking" style={{ backgroundImage: `url(${REACT_APP_BASE_URL}${booking.housePicUrl})` }} ></div>
                         <Link to={'/houses/' + booking.houseId} className='title-historic-booking'>{booking.title}</Link>
                         <p key={booking.startDate} className='date-historic-booking' >Desde el {booking.startDate.slice(0, 10)} hasta el {booking.endDate.slice(0, 10)}</p>
